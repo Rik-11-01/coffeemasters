@@ -11,21 +11,22 @@ struct offer: View {
     var title=""
     var description=""
     var body: some View {
-        ZStack{
-            Image("backgroundpattern")
-                .frame(maxWidth: .infinity,maxHeight: 200)
-                .clipped()
-            VStack {
-                Text(title)
-                    .padding()
-                    .font(.title)
-                    .background(Color("Cardbackground"))
-                Text(description)
-                    .padding()
-                    .background(Color("Cardbackground"))
-                
+            ZStack{
+                Image("backgroundpattern")
+                    .frame(maxWidth: .infinity,maxHeight: 200)
+                    .clipped()
+                    .blur(radius: 5)
+                VStack {
+                    Text(title)
+                        .padding()
+                        .font(.title)
+                        .background(Color("Cardbackground"))
+                    Text(description)
+                        .padding()
+                        .background(Color("Cardbackground"))
+                    
+                }
             }
-        }
     }
 }
 

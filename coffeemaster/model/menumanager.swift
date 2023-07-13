@@ -6,16 +6,21 @@
 //
 
 import Foundation
-
+import Alamofire
 class menumanager:ObservableObject{
-    @Published var menu:[categories]=[
-        categories(name: "HOtCofee", products: [
-            product(id: 0, name: "", description: "", price: 1.25, image: ""),
-            product(id: 0, name: "", description: "", price: 1.25, image: ""),
-            product(id: 0, name: "", description: "", price: 1.25, image: ""),
-            product(id: 0, name: "", description: "", price: 1.25, image: ""),
-            product(id: 0, name: "", description: "", price: 1.25, image: ""),
-        ])
-        
-    ]
+    
+    init(){
+        refreshItemsFromNetwork()
+    }
+    
+    @Published var menu:[categories]=[]
+    func refreshItemsFromNetwork()  {
+           AF.request("https://firtman.github.io/coffeemasters/api/menu.json")
+               .responseDecodable(of: [categories].self) { response in
+                   if let menuFromNetwork = response.value {
+                      // print(response.value)
+                       self.menu = menuFromNetwork
+                   }
+               }
+       }
 }

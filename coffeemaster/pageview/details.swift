@@ -9,20 +9,20 @@ import SwiftUI
 
 struct details: View {
     @State var quantity = 1
-    
+    var product: product
     var body: some View {
         ScrollView {
-            Image("DummyImage")
+            AsyncImage(url:product.imageURL)
                 .cornerRadius(5)
                 .frame(maxWidth: .infinity, idealHeight: 150, maxHeight: 150)
                 .clipped()
                 .padding(.top, 32)
-            Text("Product")
+            Text(product.name)
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.leading)
                 .padding(24)
             HStack {
-                Text("$4.25ea")
+                Text("$\(product.price, specifier:"%.2f") ea")
                 Stepper(value: $quantity, in: 1...10) { }
                     .frame(alignment: .leading)
             }
@@ -30,7 +30,7 @@ struct details: View {
             .multilineTextAlignment(.trailing)
             .padding()
                             
-            Text("Subtotal $4.25")
+            Text("Subtotal $\(Double(quantity)*product.price,specifier:"%.2f")")
                 .bold()
                 .padding(12)
             
@@ -49,6 +49,6 @@ struct details: View {
 
 struct details_Previews: PreviewProvider {
     static var previews: some View {
-        details()
+        details(product: product(id: 1, name: "rik", description:" raman", price: 1.25, image:" "))
     }
 }

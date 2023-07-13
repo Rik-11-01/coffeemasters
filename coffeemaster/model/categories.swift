@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct categories{
+struct categories:Codable,Identifiable{
+    
     var name:String
     var products:[product]
+    var id: String{
+        return self.name
+    }
+    
 }
